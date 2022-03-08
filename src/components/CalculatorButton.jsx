@@ -1,16 +1,19 @@
 import React from "react";
 import "../App.css";
 
-export  const CalculatorButton = (props) =>{
+export const CalculatorButton = (props) => {
 
-const handleClick = (value) => {
-    
-}
-
+  const handleClick = (value) => {
+    console.log(value);
+    props.setValue(value);
+  };
 
   return (
-    <button className="calculator-button" onClick={()=> handleClick(props.value)}>
+    <button
+      className="calculator-button"
+      onClick={() => handleClick(props.value)}
+    >
       {props.value}
     </button>
   );
-}
+};

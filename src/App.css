@@ -5,7 +5,7 @@
 .calculator-container {
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   width: 30%;
   height: 80%;
@@ -23,6 +23,7 @@
   background-color: #d3ecf2;
   border-radius: 10px;
   margin-bottom: 30px;
+  border: 1px solid #252525;
 }
 
 .output-container{
@@ -75,6 +76,7 @@
   border: none;
   font-size: 15px;
   font-weight: 700;
+  transition: background-color 0.2s ease-in-out;
 }
 
 .calculator-button:hover {
