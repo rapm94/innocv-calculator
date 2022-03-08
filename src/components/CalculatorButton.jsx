@@ -1,6 +1,3 @@
-import React from "react";
-import "../App.css";
-
 export const CalculatorButton = (props) => {
 
   const handleClick = (value) => {

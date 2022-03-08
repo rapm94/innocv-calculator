@@ -1,100 +1,114 @@
-import React, { useState } from "react";
-import "./App.css";
-import { CalculatorButton } from "./components/CalculatorButton";
+import { useState } from 'react'
+import './App.css'
+import { CalculatorButton } from './components/CalculatorButton'
 
 function App() {
-
   //creating the arrys of the buttons and the values
-  const numberButtons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-  const operatorButtons = ["+", "-", "*", "/"];
+  const numberButtons = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+  const operatorButtons = ['+', '-', '*', '/']
 
   // set the initial state of the calculator
   const [calculatorState, setCalculatorState] = useState({
-    displayValue: "",
-    operator: "",
-    firstValue: "",
+    displayValue: '',
+    operator: '',
+    firstValue: '',
     waitingForSecondValue: false,
-    secondValue: "",
-  });
+    secondValue: '',
+  })
 
   //handle number button click and update display value
   const handleNumberClick = (number) => {
-    let inputNumber = number.toString();
-    if (calculatorState.displayValue.length < 10) {
+    
+    let inputNumber = number.toString()
+
+    if (calculatorState.displayValue.length <= 10) {
       if (calculatorState.waitingForSecondValue) {
         setCalculatorState({
           ...calculatorState,
           displayValue: inputNumber,
           waitingForSecondValue: false,
           secondValue: inputNumber,
-        });
+        })
       } else {
         setCalculatorState({
           ...calculatorState,
           displayValue: calculatorState.displayValue + inputNumber,
           firstValue: calculatorState.firstValue + inputNumber,
-        });
+        })
       }
     } else {
-      alert("Sorry max 10 digits per input!");
+      alert('Sorry max 10 digits per input!')
     }
-  };
+  }
 
   //handle operator click and set the operator
   const handleOperatorClick = (operator) => {
     setCalculatorState({
       ...calculatorState,
       operator: operator,
+      displayValue: '',
       waitingForSecondValue: true,
-    });
-  };
+    })
+  }
 
   //handle the operator click and update the display value
   const handleEqualClick = () => {
-    let result = 0;
+    let result = 0
     switch (calculatorState.operator) {
-      case "+":
+      case '+':
         result =
           parseFloat(calculatorState.firstValue) +
-          parseFloat(calculatorState.secondValue);
-        break;
-      case "-":
+          parseFloat(calculatorState.secondValue)
+        break
+      case '-':
         result =
           parseFloat(calculatorState.firstValue) -
-          parseFloat(calculatorState.secondValue);
-        break;
-      case "*":
+          parseFloat(calculatorState.secondValue)
+        break
+      case '*':
         result =
           parseFloat(calculatorState.firstValue) *
-          parseFloat(calculatorState.secondValue);
-        break;
-      case "/":
+          parseFloat(calculatorState.secondValue)
+        break
+      case '/':
         result =
           parseFloat(calculatorState.firstValue) /
-          parseFloat(calculatorState.secondValue);
-        break;
+          parseFloat(calculatorState.secondValue)
+        break
       default:
-        break;
+        break
     }
+
+    //check if the result is larger than 10 digits,  if it is check,
+    //if whole number or float and display the result formatted accordingly
+
+    if (result.toString().length > 10) {
+      if (result.toString().includes('.')) {
+        result = result.toFixed(3)
+      } else {
+        result = result.toPrecision(5)
+      }
+    }
+
     setCalculatorState({
       ...calculatorState,
       displayValue: result.toString(),
       firstValue: result.toString(),
-      operator: "",
+      operator: '',
       waitingForSecondValue: false,
-    });
-  };
+    })
+  }
 
   //handle clear button click and reset the calculator
   const handleClearClick = () => {
     setCalculatorState({
-      displayValue: "",
-      operator: "",
-      firstValue: "",
+      displayValue: '',
+      operator: '',
+      firstValue: '',
       waitingForSecondValue: false,
-      secondValue: "",
-    });
-  };
+      secondValue: '',
+    })
+  }
 
   return (
     <>
@@ -128,7 +142,7 @@ function App() {
         </section>
       </div>
     </>
-  );
+  )
 }
 
-export default App;
+export default App
