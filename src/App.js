@@ -21,25 +21,25 @@ function App() {
     
     let inputNumber = number.toString()
 
-    if (calculatorState.displayValue.length <= 10) {
+    if (calculatorState.displayValue.length <= 10 && calculatorState.displayValue.includes('e') === false) {
       if (calculatorState.waitingForSecondValue) {
         setCalculatorState({
           ...calculatorState,
           displayValue: inputNumber,
           waitingForSecondValue: false,
           secondValue: inputNumber,
-        })
+        });
       } else {
         setCalculatorState({
           ...calculatorState,
           displayValue: calculatorState.displayValue + inputNumber,
           firstValue: calculatorState.firstValue + inputNumber,
-        })
-      }
-    } else {
-      alert('Sorry max 10 digits per input!')
-    }
+        });
+      };
+  } else {
+    alert('Sorry max 10 digits per input!, or dont add number to scientific notation numbers, just continue to operate on them!')
   }
+}
 
   //handle operator click and set the operator
   const handleOperatorClick = (operator) => {
